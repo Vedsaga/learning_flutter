@@ -1,102 +1,95 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
-class HorizontalVerticalScroll extends StatelessWidget {
+class HorizontalVerticalScroll extends StatefulWidget {
   const HorizontalVerticalScroll({super.key});
 
-  Color _getColumnColor1(int index) {
-    switch (index) {
-      case 0:
-        return Colors.orange;
-      case 1:
-        return Colors.red;
-      case 2:
-        return Colors.lightBlue;
+  @override
+  State<HorizontalVerticalScroll> createState() =>
+      _HorizontalVerticalScrollState();
+}
 
-      default:
-        return Colors.black;
-    }
-  }
+class _HorizontalVerticalScrollState extends State<HorizontalVerticalScroll> {
+  // randomaize color generator
+  Color _randomColor() {
+// Bits 24-31 are the alpha value.
+// Bits 16-23 are the red value.
+// Bits 8-15 are the green value.
+// Bits 0-7 are the blue value.
+    final randomInstance = Random();
+    final opacity = randomInstance.nextDouble();
+    final randomR = randomInstance.nextInt(255);
+    final randomG = randomInstance.nextInt(255);
+    final randomB = randomInstance.nextInt(255);
 
-  Color _getColumnColor2(int index) {
-    switch (index) {
-      case 0:
-        return Colors.black;
-      case 1:
-        return Colors.purple;
-      default:
-        return Colors.black;
-    }
-  }
-
-  Color _getRowColor(int index) {
-    switch (index) {
-      case 0:
-        return Colors.lightGreen;
-      case 1:
-        return Colors.grey;
-      case 2:
-        return Colors.lightGreen;
-      default:
-        return Colors.lightGreen;
-    }
+    return Color.fromRGBO(randomR, randomG, randomB, opacity);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: const Text(
-            'Demo Learning',
-            style: TextStyle(
-              fontSize: 21,
-              fontWeight: FontWeight.bold,
-            ),
+      appBar: AppBar(
+        title: const Text(
+          'Demo Learning',
+          style: TextStyle(
+            fontSize: 21,
+            fontWeight: FontWeight.bold,
           ),
         ),
-        body: SingleChildScrollView(
-          child: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                ...List.generate(
-                  5,
-                  (index) => Padding(
-                    padding: const EdgeInsets.only(bottom: 23),
-                    child: ColoredBox(
-                      color: _getColumnColor1(index),
-                      child: const SizedBox(height: 89, width: 89),
-                    ),
+      ),
+      body: SingleChildScrollView(
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              ...List.generate(
+                5,
+                (index) => Padding(
+                  padding: const EdgeInsets.only(bottom: 23),
+                  child: ColoredBox(
+                    color: _randomColor(),
+                    child: const SizedBox(height: 89, width: 89),
                   ),
                 ),
-                SizedBox(
-                  height: 89,
-                  child: ListView.builder(
-                      itemCount: 10,
-                      shrinkWrap: true,
-                      scrollDirection: Axis.horizontal,
-                      itemBuilder: (_, index) {
-                        return Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 28),
-                          child: ColoredBox(
-                              color: _getRowColor(index),
-                              child: const SizedBox(
-                                height: 89,
-                                width: 89,
-                              )),
-                        );
-                      }),
-                ),
-                ...List.generate(
-                    5,
-                    (index) => Padding(
-                        padding: const EdgeInsets.only(top: 23),
+              ),
+              SizedBox(
+                height: 89,
+                child: ListView.builder(
+                    itemCount: 10,
+                    shrinkWrap: true,
+                    scrollDirection: Axis.horizontal,
+                    itemBuilder: (_, index) {
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 28),
                         child: ColoredBox(
-                          color: _getColumnColor2(index),
-                          child: const SizedBox(height: 89, width: 89),
-                        )))
-              ],
-            ),
+                            color: _randomColor(),
+                            child: const SizedBox(
+                              height: 89,
+                              width: 89,
+                            )),
+                      );
+                    }),
+              ),
+              ...List.generate(
+                  5,
+                  (index) => Padding(
+                      padding: const EdgeInsets.only(top: 23),
+                      child: ColoredBox(
+                        color: _randomColor(),
+                        child: const SizedBox(height: 89, width: 89),
+                      )))
+            ],
           ),
-        ));
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.black,
+        onPressed: () {
+          setState(() {});
+        },
+        child: const Icon(Icons.color_lens_outlined, color: Colors.white),
+      ),
+    );
   }
 }

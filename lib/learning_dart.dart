@@ -77,6 +77,12 @@ class Abhishek with Salary implements Human, Work {
 
   @override
   void salary() {}
+
+  const Abhishek();
+
+  factory Abhishek.fromJson(Map<String, dynamic> json) {
+    return const Abhishek();
+  }
 }
 
 class Harsh extends Human with Salary, Rate implements Work {
@@ -90,4 +96,41 @@ class Harsh extends Human with Salary, Rate implements Work {
 
   @override
   void salary() {}
+}
+
+// Generic
+final listOfNumber = ['28', 28, true, false, 1, '9999', null, [], {}, ()];
+
+final list = <num>[28, 1, 28];
+final set = <num>{28, 1};
+final map = <String, Object?>{'one': 1, 'two': 'two'};
+const record = ('one', 1, true);
+
+enum WeekDay {
+  monday,
+  tuesday,
+  wednesday,
+  thursday,
+  friday,
+  saturday,
+  sunday,
+}
+
+bool isMonday(WeekDay day) {
+  switch (day) {
+    case WeekDay.monday:
+      return true;
+    case WeekDay.tuesday:
+      return false;
+    case WeekDay.wednesday:
+      return false;
+    case WeekDay.thursday:
+      return false;
+    case WeekDay.friday:
+      return false;
+    case WeekDay.saturday:
+      return false;
+    case WeekDay.sunday:
+      return false;
+  }
 }

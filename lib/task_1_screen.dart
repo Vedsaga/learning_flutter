@@ -43,7 +43,24 @@ class Task1Screen extends StatelessWidget {
       body: Column(
         children: [
           Row(
-            children: [],
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(''),
+                  Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: const [
+                      Icon(Icons.location_on),
+                      const SizedBox(width: 8),
+                      Text('Nearby'),
+                    ],
+                  )
+                ],
+              ),
+              Icon(Icons.location_searching_outlined),
+            ],
           ),
           Row(
             children: [],

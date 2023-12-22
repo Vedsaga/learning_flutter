@@ -18,7 +18,7 @@ const int y = 1;
 final int z = 1;
 
 /// Memory type var
-var a = 1;
+int  a = 1;
 
 /// Memory type dynamic
 dynamic b = 1;
